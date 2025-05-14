@@ -1,9 +1,8 @@
-// Last updated: 5/13/2025, 9:57:47 PM
+// Last updated: 5/13/2025, 9:59:02 PM
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
         
-        int windowLen = 0;
         int windowSum = 0;
         int left = 0;
         int right = 0;
@@ -11,16 +10,14 @@ public:
         while (right != nums.size()) 
         {
             windowSum += nums[right];
-            windowLen += 1;
             if (windowSum >= target) 
             {
                 // shrink the window
                 while (left <= right && windowSum >= target) 
                 {
-                    res = std::min(res, windowLen);
+                    res = std::min(res, right - left + 1);
 
                     windowSum -= nums[left];
-                    windowLen -= 1;
                     left++;
                 }
             }
