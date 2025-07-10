@@ -1,28 +1,27 @@
-// Last updated: 5/13/2025, 8:28:57 PM
+// Last updated: 7/9/2025, 10:39:52 PM
 class Solution {
 public:
     string reverseStr(string s, int k) {
-        bool shouldReverse = false;
-        int i = 0;
-        for (; i < s.size(); i += k) 
+        int start = 0;
+        int end = 0;
+        
+        bool shouldRev = true;
+        // abcdefg
+        //       
+        while (end < s.size()) 
         {
-            if (shouldReverse) reverse(s, i - k, i - 1);
-            shouldReverse = !shouldReverse;
+            if (end - start == k) 
+            {
+                if (shouldRev) std::reverse(s.begin() + start, s.begin() + end);
+                shouldRev = !shouldRev;
+                start = end;
+            }
+
+            end++;
         }
 
-        if (shouldReverse) 
-        {
-            reverse(s, i - k, s.size() - 1);
-        }
-
+        if (shouldRev) std::reverse(s.begin() + start, s.begin() + end);
         return s;
-    }
 
-    void reverse(string& s, int start, int end) 
-    {
-        while (start < end) 
-        {
-            std::swap(s[start++], s[end--]);
-        }
     }
 };
